@@ -40,6 +40,8 @@ public class ConcurrentResourcePool<R> implements ResourcePool<R> {
         while (anyAcquired) {
             anyAcquired = resources.values().stream().anyMatch(ResourceWrapper::isAcquired);
         }
+        //let GC go its work
+        resources.clear();
     }
 
     @Override
@@ -111,6 +113,7 @@ public class ConcurrentResourcePool<R> implements ResourcePool<R> {
     public void closeNow() {
         setClosed();
 
+        //let GC go its work
         resources.clear();
     }
 
