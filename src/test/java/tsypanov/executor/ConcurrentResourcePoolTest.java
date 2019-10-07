@@ -108,6 +108,15 @@ public class ConcurrentResourcePoolTest {
     }
 
     @Test
+    public void acquire_onClosedPool() {
+        ConcurrentResourcePool<Integer> pool = new ConcurrentResourcePool<>();
+        pool.add(1);
+        pool.close();
+
+        final Integer acquired = pool.acquire();
+    }
+
+    @Test
     public void acquire_testWaitingForRelease() {
         ConcurrentResourcePool<Integer> pool = new ConcurrentResourcePool<>();
         pool.add(1);
