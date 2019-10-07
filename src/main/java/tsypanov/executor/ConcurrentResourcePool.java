@@ -90,6 +90,7 @@ public class ConcurrentResourcePool<R> implements ResourcePool<R> {
 
     @Override
     public void release(final R resource) {
+        Objects.requireNonNull(resource);
         resources.get(resource).release();
     }
 

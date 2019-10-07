@@ -159,6 +159,14 @@ public class ConcurrentResourcePoolTest {
         assertNotNull(pool.acquire());
     }
 
+    @Test(expected = NullPointerException.class)
+    public void release_null() {
+        ConcurrentResourcePool<Integer> pool = new ConcurrentResourcePool<>();
+        pool.add(1);
+
+        pool.release(null);
+    }
+
     @Test(timeout = 2100L)
     public void add() {
         ConcurrentResourcePool<Integer> pool = new ConcurrentResourcePool<>();
